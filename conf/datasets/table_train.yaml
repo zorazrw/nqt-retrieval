@@ -1,0 +1,9 @@
+# @package _group_
+
+nq_table_train:
+  _target_: dpr.data.biencoder_data.NqtJsonQADataset
+  file: "/mnt/zhiruow/hitab/table-retrieval/datasets/nq_table/train.converted"
+
+nq_table_dev:
+  _target_: dpr.data.biencoder_data.NqtJsonQADataset
+  file: "/mnt/zhiruow/hitab/table-retrieval/datasets/nq_table/dev.converted"

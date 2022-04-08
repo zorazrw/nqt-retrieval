@@ -1,0 +1,48 @@
+# @package _group_
+
+nq_table_raw: 
+  _target_: dpr.data.retriever_data.JsonlNQTablesCtxSrc
+  file: "/mnt/zhiruow/hitab/table-retrieval/datasets/nq_table/tables.jsonl"
+  id_prefix: 'nqt:'
+
+nq_table: 
+  _target_: dpr.data.retriever_data.JsonlNqtCtxSrc
+  file: "/mnt/zhiruow/hitab/table-retrieval/datasets/nq_table/tables_proc.jsonl"
+  id_prefix: 'nqt:'
+
+nq_table_all: 
+  _target_: dpr.data.retriever_data.JsonlNqtCtxSrc
+  file: "/mnt/zhiruow/hitab/table-retrieval/datasets/nq_table/tables_all.jsonl"
+  id_prefix: 'nqt:'
+
+
+nq_table_row: 
+  _target_: dpr.data.retriever_data.JsonlNqtCtxSrc
+  file: "/mnt/zhiruow/hitab/table-retrieval/datasets/nq_table/tables_row.jsonl"
+  id_prefix: 'nqt:'
+
+nq_table_column: 
+  _target_: dpr.data.retriever_data.JsonlNqtCtxSrc
+  file: "/mnt/zhiruow/hitab/table-retrieval/datasets/nq_table/tables_column.jsonl"
+  id_prefix: 'nqt:'
+
+nq_table_both: 
+  _target_: dpr.data.retriever_data.JsonlNqtCtxSrc
+  file: "/mnt/zhiruow/hitab/table-retrieval/datasets/nq_table/tables_both.jsonl"
+  id_prefix: 'nqt:'
+
+
+nq_table_dcell: 
+  _target_: dpr.data.retriever_data.JsonlNqtCtxSrc
+  file: "/mnt/zhiruow/hitab/table-retrieval/datasets/nq_table/tables_dcell.jsonl"
+  id_prefix: 'nqt:'
+
+nq_table_drow: 
+  _target_: dpr.data.retriever_data.JsonlNqtCtxSrc
+  file: "/mnt/zhiruow/hitab/table-retrieval/datasets/nq_table/tables_drow.jsonl"
+  id_prefix: 'nqt:'
+
+nq_table_dnone: 
+  _target_: dpr.data.retriever_data.JsonlNqtCtxSrc
+  file: "/mnt/zhiruow/hitab/table-retrieval/datasets/nq_table/tables_dnone.jsonl"
+  id_prefix: 'nqt:'
