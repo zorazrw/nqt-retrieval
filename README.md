@@ -1,7 +1,11 @@
-# Open-Domain Table Retrieval
+# Open-Domain Table Retrieval for Natural Questions
+
+This repository involves the data and code for the paper:
+
+[Table Retrieval May Not Necessitate Table-specific Model Design]()
 
 
-## [0] Preliminaries 
+## Preliminaries 
 To install the necessary libraries, run 
 ```
 pip install . 
@@ -22,7 +26,7 @@ export ROOT_DIR=`pwd`
 ```
 
 
-## [1] Zero-shot Retrieval Inference 
+## Zero-shot Retrieval Inference 
 To perform zero-shot retrieval inference on the NQ-table table retrieval dataset, we need to first generate the embeddings of all tables (`generate_embeddings.py`), then, encode question/queries in-time and search for the most relevant tables (`dense_retrieval.py`). 
 
 To automate the entire pipeline, just execute the `scripts/run_inference.sh`. This will iterate each dataset to generate context embeddings and run inference accordingly. 
@@ -30,6 +34,7 @@ To automate the entire pipeline, just execute the `scripts/run_inference.sh`. Th
 If you want a more concrete walk-thru of each module, we detail the them as follows: 
 
 **Generate Context Embeddings**
+
 Different table contexts, located in different files and may need to be loaded with different classes, are specified in the `conf/ctx_sources/table_sources.yaml` file. One can alter the `ctx_src` argument when calling the `generate_embeddings.py` script. 
 By default, we use NQ-Table which is denoted as `nq_table`. 
 
@@ -40,7 +45,9 @@ python generate_embeddings.py
   out_file=${your_path_to_store_embeddings} 
 ```
 
+
 **Retrieve Relevant Tables for Questions/Queries** 
+
 In this step, we need to specify the file(s) containing questions so as to pair relevant tables for them using the generated embeddings. 
 Likewise, these files are included in the `conf/datasets/table_retrieval.yaml` file. One can alter the `qa_dataset` argument to load different questions, when calling the `dense_retrieval.py`. 
 
@@ -56,9 +63,10 @@ python dense_retrieval.py
 ```
 
 
-## [2] Fine-tune with Model Variants 
+## Fine-tune with Model Variants 
 
 **Settings**
+
 Neither DPR has table-specific designs nor has it been trained on tables. 
 We further explore the benefit of (1) augmented fine-tuning, and (2) add auxiliary structure-aware modules. 
 
@@ -75,7 +83,9 @@ For `auxemb` and `biased` which requires extra parameters (hence change in model
 encoder.encoder_model_type="hf_bert_mix"   # or "hf_bert_bias"
 ```
 
+
 **Creating Training (and Validation) Dataset**
+
 To obtain the most effective training data, we follow the hard-negative selection strategy and leverage the retrieval results for sample curation. To be more concrete, for trainable datasets (NQ-Table and WebQueryTable), we firstly run zero-shot retrieval for training and validation samples. Then for each question and its retrieved 100 table contexts, we categorize them into (1) positive, (2) negative, (3) hard negative. To (1) if it contains the answer text, and to (2)/(3) otherwise. If the context ranks among the top-20, it goes into (3), otherwise would be a rather simple negative context and goes into (2). 
 
 To implement this, we also need to run `dense_retrieval.py` inference using the generated table context embeddings. 
@@ -92,6 +102,7 @@ One can also automate this process by running the `scripts/curate_data.sh`
 
 
 **Bi-Encoder Training**
+
 With the curated datasets, we can then start fine-tuning using `train_biencoder.py`. Viable training options reads in the `conf/datasets/biencoder_train.yaml`. 
 
 ```
@@ -108,14 +119,24 @@ Or simply, just run `scripts/tune_model.sh`.
 
 
 **Evaluate with Tuned Models**
+
 Similarly to the zero-shot inference, but probably need to specified the fine-tuned model file, as well as the new names for embedding and retrieval results. See `scripts/run_inference.sh` for more details. 
 
 
 
-### 3. Ablation Study (NQ-Table)
+## Ablation Study (NQ-Table)
 **Delimiter**
+
 Use the `process_tables.py` to create table contexts linearized using different delimiters. 
 Alter the arguments `header_delimiter`, `cell_delimiter`, and `row_delimiter` to compare. 
 
 **Structure Perturbation**
+
 Use the `process_tables.py` to create processed tables shuffled in different orientations (by row, by column) and to the designated extent (prob default to 0.5). This will create `datasets/nq_table/tables_row.jsonl` and `datasets/nq_table/tables_column.jsonl`. 
+
+
+## Citation
+
+```
+# to add
+```
