@@ -138,5 +138,10 @@ Use the `process_tables.py` to create processed tables shuffled in different ori
 ## Citation
 
 ```
-# to add
+@article{wang2022table,
+  title={Table Retrieval May Not Necessitate Table-specific Model Design},
+  author={Wang, Zhiruo and Jiang, Zhengbao and Nyberg, Eric and Neubig, Graham},
+  journal={arXiv preprint arXiv:2205.09843},
+  year={2022}
+}
 ```
