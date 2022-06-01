@@ -2,7 +2,7 @@
 
 This repository involves the data and code for the paper:
 
-[Table Retrieval May Not Necessitate Table-specific Model Design]()
+[Table Retrieval May Not Necessitate Table-specific Model Design](https://arxiv.org/pdf/2205.09843.pdf)
 
 
 ## Preliminaries 
