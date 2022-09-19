@@ -1,5 +1,7 @@
 # Open-Domain Table Retrieval for Natural Questions
 
+<a href="https://github.com/pytorch/fairseq/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
+
 This repository involves the data and code for the paper:
 
 [Table Retrieval May Not Necessitate Table-specific Model Design](https://arxiv.org/pdf/2205.09843.pdf)
